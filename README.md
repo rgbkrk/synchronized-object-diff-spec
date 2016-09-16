@@ -4,7 +4,7 @@ I'd love to see a general synchronized objects specification for Jupyter, extrac
 
 ### Model reduction thinking
 
-What if we embrace redux-like semantics by expecting a reducer
+Let's think in terms of reducing a model from changes for a moment:
 
 ```js
 const simpleUpdate = (model, changes) => 
