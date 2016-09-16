@@ -1,6 +1,6 @@
 ## Thinking 🤔 on Synchronized Objects for Jupyter
 
-I'd love to see a general synchronized objects specification for Jupyter, extracting the core of what ipywidgets provides.
+I'd love to see a general synchronized objects specification for Jupyter/nteract, extracting the core of what ipywidgets provides.
 
 ### Model reduction thinking
 
