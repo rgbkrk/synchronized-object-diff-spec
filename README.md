@@ -48,7 +48,7 @@ Kernel:              C
 Client:  A --> B --> C --> D ✅
 ```
 
-To clarify: it sounds like we want a message you can send to request the whole model or a collection of patches, all the while receiving patches on top of the initial model. Similar to other realtime models, you do resolution on one actor (likely the backend), amongst "competing" actors while providing an optimistic "merged" view to the user. If things get out of sync the kernel can request either the model or all the changes they missed and vice versa. Basically, applying patches.
+All actors can send to request the whole model or a collection of patches - all while receiving patches on top of the initial model. Similar to other realtime models, you do resolution on one actor (likely the backend), amongst "competing" actors while providing an optimistic "merged" view to clients. If things get out of sync the kernel can request either the model or all the changes they missed and vice versa.
 
 ### Things to think on
 
