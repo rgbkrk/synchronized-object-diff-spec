@@ -1,5 +1,5 @@
 {
-  "name": "synchronized-object-diff-spec",
+  "name": "@rgbkrk/synchronized-object-diff-spec",
   "version": "1.0.0",
   "description": "Exploring synchronized objects for Jupyter kernels, extracting the core of what ipywidgets provides.",
   "main": "index.js",
