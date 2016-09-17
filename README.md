@@ -89,3 +89,18 @@ When a new model is created, with a modelID, we register the reducer and apply i
 ```
 
 Changes to that model get reflected back to registered views. React (and the component itself) handle the rest of the changes.
+
+
+Questions to answer:
+
+* What's the message spec?
+* How do we handle differences?
+* How do we initiate the model?
+  - Tempted to rely on display_data/execute_reply/pager, relying on the mimebundles
+
+### Initiating the model
+
+It's tempting to rely on any of the messages that return a mime bundle, so that
+we can display interactive models anywhere that has a display-like area.
+
+I'd like the first message to both provide the initial model state _and_ the model id.
