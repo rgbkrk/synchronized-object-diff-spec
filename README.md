@@ -4,10 +4,10 @@ I'd love to see a general synchronized objects specification for Jupyter/nteract
 
 ### Model reduction
 
-Let's try a simple paradigm - reducing a model from changes:
+Let's think about how a model could get updates.
 
 ```js
-const simpleUpdate = (model, change) => 
+const simpleUpdate = (model, change) =>
   Object.assign({}, model, change);
 ```
 
@@ -42,7 +42,7 @@ Kernel: A --> B --> C --> D
 
 Client: A --> B --> D       ❌
  "Ruh roh, I have up to B, just got D."
- 
+
 Kernel:              C
 
 Client:  A --> B --> C --> D ✅
@@ -54,3 +54,38 @@ All actors can send to request the whole model or a collection of patches - all 
 
 * Is it good/bad that we expect the component to have a local state?
   * Should they provide the reducer, we pass them the final model state -- so its in the state tree and notebook doc, potentially easier for synchronization amongst multiple users
+
+### Proposed plugin API for nteract
+
+We'll extend on top of the transform API
+
+```js
+class Transform extends React.Component {
+  ...
+}
+
+Transform.mimetype = 'application/vnd.tf.v1+json'
+```
+
+To provide an optional reducer:
+
+```js
+Transform.reducer = (model, update) =>
+  Object.assign({}, model, update);
+```
+
+Note that it's up to the implementer to declare this reducer.
+
+When a new model is created, with a modelID, we register the reducer and apply it to our list of models. Later, as changes flow through, we update the state of that model.
+
+```js
+  [MODEL_UPDATE]: (state, action) => {
+    const id = action.modelID;
+    const model = state.getIn(['models', id]);
+    return state.setIn(['models', id, 'state'],
+      model.reducer(model.state, action.change));
+  }
+}
+```
+
+Changes to that model get reflected back to registered views. React (and the component itself) handle the rest of the changes.
