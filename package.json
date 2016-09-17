@@ -1,0 +1,22 @@
+{
+  "name": "synchronized-object-diff-spec",
+  "version": "1.0.0",
+  "description": "Exploring synchronized objects for Jupyter kernels, extracting the core of what ipywidgets provides.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rgbkrk/synchronized-object-diff-spec.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/rgbkrk/synchronized-object-diff-spec/issues"
+  },
+  "homepage": "https://github.com/rgbkrk/synchronized-object-diff-spec#readme",
+  "dependencies": {
+    "uuid": "^2.0.2"
+  }
+}
