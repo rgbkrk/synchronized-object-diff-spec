@@ -50,10 +50,9 @@ Client:  A --> B --> C --> D ✅
 
 All actors can send to request the whole model or a collection of patches - all while receiving patches on top of the initial model. Similar to other real-time models, the resolution is done by one actor, the kernel, amongst "competing" actors while providing an optimistic "merged" view to clients. If the model gets out of sync, the kernel can request either the model or all the changes they missed and vice versa.
 
-### Things to think on
+Notes from William Stein: we'll likely want a synchronization numbers or synced clocks for this.
 
-* Is it good/bad that we expect the component to have a local state?
-  * Should they provide the reducer, we pass them the final model state -- so its in the state tree and notebook doc, potentially easier for synchronization amongst multiple users
+Goal is to have eventual consistency in ~1 second. On reconnect (due to network), synchronize, get latest synchronization numbers.
 
 ### Proposed plugin API for nteract
 
