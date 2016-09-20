@@ -126,7 +126,7 @@ These are going to end up using the comms pathway while I'm prototyping, but I'd
 
 Message type: `update_model`
 
-```json
+```
 content = {
   id: string
   data: value (Object, string, etc.)
