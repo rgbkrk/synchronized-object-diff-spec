@@ -120,6 +120,21 @@ if `Transform.reducer` exists for the `Transform` with this mimetype (yes, I'm i
 
 We now have enough to register a new model (or ensure a prior one).
 
+## Updating the model
+
+These are going to end up using the comms pathway while I'm prototyping, but I'd like to assume we have a higher level message.
+
+Message type: `update_model`
+
+```json
+content = {
+  id: string
+  data: value (Object, string, etc.)
+  metadata: value (Object, string, etc.)
+}
+```
+
+
 ### Questions to explore and answer
 
 Questions to answer:
@@ -129,3 +144,4 @@ Questions to answer:
 * How do we initiate the model?
   - Tempted to rely on display_data/execute_reply/pager, relying on the mimebundles
 * How do we handle binary payloads (from the message spec)?
+* How do we delete a model / know to delete a model? (are there "listeners")
