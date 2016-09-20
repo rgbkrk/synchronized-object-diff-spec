@@ -106,7 +106,9 @@ content = {
     }
   },
   "metadata" : {
-    "model_id": "e191c04e-4428-4648-9f76-dc7e643bd980"
+    "application/custom+json": {
+      "model_id": "e191c04e-4428-4648-9f76-dc7e643bd980"
+    }
   }
 }
 ```
@@ -115,23 +117,6 @@ In our case, this means that the frontend can now track this model_id.
 
 Knowing whether or not to use this `model_id` is a matter of checking to see
 if `Transform.reducer` exists for the `Transform` with this mimetype (yes, I'm ignoring the bundle).
-
-Perhaps if we want to be explicit about a matching model_id to the mimetype given:
-
-```
-content = {
-  "data" : {
-    "application/custom+json": {
-      "value": 2
-    }
-  },
-  "metadata" : {
-    "models": {
-      "application/custom+json": "e191c04e-4428-4648-9f76-dc7e643bd980"
-    }
-  }
-}
-```
 
 We now have enough to register a new model (or ensure a prior one).
 
