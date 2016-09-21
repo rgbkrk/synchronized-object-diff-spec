@@ -58,6 +58,8 @@ Alternatively, synchronize clocks (which is easy to do for an electron app).
 
 Suggestion from Jonathan Frederic: Dead Reckoning
 
+Source of Truth: kernel
+
 ### Proposed plugin API for nteract
 
 We'll extend on top of the transform API
@@ -145,7 +147,6 @@ Questions to answer:
 
 * What's the message spec?
 * How do we handle differences?
-* How do we initiate the model?
-  - Tempted to rely on display_data/execute_reply/pager, relying on the mimebundles
 * How do we handle binary payloads (from the message spec)?
 * How do we delete a model / know to delete a model? (are there "listeners")
+* Nested models
