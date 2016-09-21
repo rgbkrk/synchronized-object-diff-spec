@@ -54,6 +54,10 @@ Notes from William Stein: we'll likely want a synchronization numbers or synced 
 
 Goal is to have eventual consistency in ~1 second. On reconnect (due to network), synchronize, get latest synchronization numbers.
 
+Alternatively, synchronize clocks (which is easy to do for an electron app).
+
+Suggestion from Jonathan Frederic: Dead Reckoning
+
 ### Proposed plugin API for nteract
 
 We'll extend on top of the transform API
