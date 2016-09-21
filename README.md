@@ -88,14 +88,14 @@ When a new model is created, with a modelID, we register the reducer and apply i
     const id = action.modelID;
     const model = state.getIn(['models', id]);
     return state.setIn(['models', id, 'state'],
-      model.reducer(model.state, action.update));
+      model.reducer(model.state, action.update, models));
   }
 }
 ```
 
 Changes to that model get reflected back to registered views. React (and the component itself) handle the rest of the changes. The hope would be that the last state of the model could be serialized into the notebook document rather than the initial state from the `display_data`.
 
-
+We also pass `models` so they can subselect from other models if it's a nested model.
 
 ### Initiating the model
 
