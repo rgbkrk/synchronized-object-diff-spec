@@ -1,6 +1,10 @@
-## Thinking  on Synchronized Objects for Jupyter
+# Thinking  on Synchronized Objects for Jupyter
 
 I'd love to see a general synchronized objects specification for Jupyter/nteract, extracting the core of what ipywidgets provides.
+
+TODO: Write a preamble with the motivations and goals.
+
+## Forming a messaging specification
 
 ### Initiating the model
 
@@ -86,9 +90,9 @@ Suggestion from Jonathan Frederic: Dead Reckoning
 
 Source of Truth: kernel
 
-### Proposed plugin API for nteract
+## Proposed plugin API for nteract
 
-#### Model reduction
+### Model reduction
 
 Let's think about how a model could get updates.
 
@@ -115,7 +119,7 @@ The :key: here would be that this is a contract _for a frontend component_ to co
 
 It's up to the implementer for how big or small they want to be in terms of what's diff'ed.
 
-#### Extending the transform API
+### Extending the transform API
 
 We'll extend on top of the transform API
 
@@ -152,7 +156,7 @@ Changes to that model get reflected back to registered views. React (and the com
 
 We also pass `models` so they can subselect from other models if it's a nested model.
 
-### Questions to explore and answer
+## Questions to explore and answer
 
 Questions to answer:
 
