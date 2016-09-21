@@ -91,7 +91,7 @@ When a new model is created, with a modelID, we register the reducer and apply i
 }
 ```
 
-Changes to that model get reflected back to registered views. React (and the component itself) handle the rest of the changes.
+Changes to that model get reflected back to registered views. React (and the component itself) handle the rest of the changes. The hope would be that the last state of the model could be serialized into the notebook document rather than the initial state from the `display_data`.
 
 
 
