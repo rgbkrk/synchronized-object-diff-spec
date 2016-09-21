@@ -86,7 +86,7 @@ When a new model is created, with a modelID, we register the reducer and apply i
     const id = action.modelID;
     const model = state.getIn(['models', id]);
     return state.setIn(['models', id, 'state'],
-      model.reducer(model.state, action.change));
+      model.reducer(model.state, action.update));
   }
 }
 ```
