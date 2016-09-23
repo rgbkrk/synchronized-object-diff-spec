@@ -12,9 +12,8 @@ Message type: `create_model`
 
 ```
 content = {
-  id: string
-  data: value (Object, string, etc.)
-  metadata: value (Object, string, etc.)
+  id: string,
+  target: string,
 }
 ```
 
@@ -33,31 +32,6 @@ content = {
 ```
 
 Q: Should the update message provide information about if an attached binary buffer comes with the message?
-
-### Displaying the model
-
-It's tempting to rely on any of the messages that return a mime bundle, so that
-we can display interactive models anywhere that has a display-like area.
-
-I'd like the first message to both provide the initial model state _and_ the model id.
-
-```json
-content = {
-  "data" : {
-    "application/custom+json": {
-      "value": 2
-    }
-  },
-  "metadata" : {
-    "application/custom+json": {
-      "model_id": "e191c04e-4428-4648-9f76-dc7e643bd980"
-    }
-  }
-}
-```
-
-On the nteract side, knowing whether or not to use this `model_id` is a matter of checking to see
-if `Transform.reducer` exists for the `Transform` with this mimetype.
 
 ### Out-of-synchronization
 
@@ -119,37 +93,44 @@ The :key: here would be that this is a contract _for a frontend component_ to co
 
 It's up to the implementer for how big or small they want to be in terms of what's diff'ed.
 
-### Extending the transform API
+### Providing reducers
 
-We'll extend on top of the transform API
-
-```js
-class Transform extends React.Component {
-  ...
-}
-
-Transform.mimetype = 'application/vnd.tf.v1+json'
-```
-
-To provide an optional reducer:
+Per model type, there should be an associated reducer which we'll allow to be
+a function.
 
 ```js
-Transform.reducer = (model, update) =>
+module.exports.reducer = (model, update) =>
   Object.assign({}, model, update);
 ```
 
-Note that it's up to the implementer to declare this reducer.
-
-When a new model is created, with a modelID, we register the reducer and apply it to our list of models. Later, as changes flow through, we update the state of that model.
+When a new model is created, with a modelID, we register the reducer and apply it to our list of models.
 
 ```js
-  [MODEL_UPDATE]: (state, action) => {
-    const id = action.modelID;
-    const model = state.getIn(['models', id]);
-    return state.setIn(['models', id, 'state'],
-      model.reducer(model.state, action.update, models));
-  }
+[MODEL_CREATE]: (state, action) => {
+  const { target, id } = action;
+  return state.setIn(['models', id, 'reducer'],
+            state.getIn(['modelReducers'], target);
 }
+```
+
+Later, as changes flow through, we update the state of that model.
+
+```js
+[MODEL_UPDATE]: (state, action) => {
+  const id = action.modelID;
+  const model = state.getIn(['models', id]);
+  return state.setIn(['models', id, 'state'],
+    model.reducer(model.state, action.update, models));
+}
+```
+
+Displaying
+
+```js
+<Transform
+  data={data}
+  models={models}
+/>
 ```
 
 Changes to that model get reflected back to registered views. React (and the component itself) handle the rest of the changes. The hope would be that the last state of the model could be serialized into the notebook document rather than the initial state from the `display_data`.
