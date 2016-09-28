@@ -1,8 +1,10 @@
-# Thinking  on Synchronized Objects for Jupyter
+# Thinking on Synchronized Objects for Jupyter
 
-I'd love to see a general synchronized objects specification for Jupyter/nteract, extracting the core of what ipywidgets provides.
+I'd love to see a general synchronized objects specification for Jupyter/nteract, extracting the core of what ipywidgets provides. We can start by defining a set of implementation agnostic messages for triggering and communicating state changes between a kernel-side model and one or more client views. With these messages, we can work on:
 
-TODO: Write a preamble with the motivations and goals.
+* driving arbitrary interactive widgets from kernel state changes
+* having multiple clients viewing the state of a single kernel
+* getting clients and models back into sync when they haven't been in constant contact
 
 ## Forming a messaging specification
 
