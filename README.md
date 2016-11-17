@@ -73,8 +73,13 @@ Source of Truth: kernel
 Let's think about how a model could get updates.
 
 ```js
-const simpleUpdate = (model, change) =>
-  Object.assign({}, model, change);
+// Assign at top-level keys
+const mergeNotRecursive = (model, change) =>
+  Object.assign({}, model, change)
+
+// Deep merge
+const mergeRecursively = (model, change) =>
+  _.merge({}, model, change)
 ```
 
 If they rely on Immutable.js
